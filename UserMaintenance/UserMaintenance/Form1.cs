@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,7 @@ namespace UserMaintenance
             label_FullName.Text = Resource1.FullName;
             button_Add.Text = Resource1.Add;
             button_ToFile.Text = Resource1.ToFile;
+            button_Del.Text = Resource1.Del;
 
             listBox_User.DataSource = users;
             listBox_User.ValueMember = "ID";
@@ -47,6 +49,19 @@ namespace UserMaintenance
 
             }
             sw.Close();
+        }
+
+        private void button_Del_Click(object sender, EventArgs e)
+        {
+            var userID = (Guid)(listBox_User.SelectedValue);
+
+            var usertorles = from x in users
+                                 where x.ID == userID
+            select x;
+
+            users.Remove(usertorles.FirstOrDefault());
+
+            
         }
     }
 }

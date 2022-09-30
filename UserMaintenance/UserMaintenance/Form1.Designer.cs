@@ -33,6 +33,7 @@
             this.label_FullName = new System.Windows.Forms.Label();
             this.button_Add = new System.Windows.Forms.Button();
             this.button_ToFile = new System.Windows.Forms.Button();
+            this.button_Del = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox_User
@@ -80,11 +81,22 @@
             this.button_ToFile.UseVisualStyleBackColor = true;
             this.button_ToFile.Click += new System.EventHandler(this.button_ToFile_Click);
             // 
+            // button_Del
+            // 
+            this.button_Del.Location = new System.Drawing.Point(450, 250);
+            this.button_Del.Name = "button_Del";
+            this.button_Del.Size = new System.Drawing.Size(305, 59);
+            this.button_Del.TabIndex = 7;
+            this.button_Del.Text = "button1";
+            this.button_Del.UseVisualStyleBackColor = true;
+            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_Del);
             this.Controls.Add(this.button_ToFile);
             this.Controls.Add(this.button_Add);
             this.Controls.Add(this.label_FullName);
@@ -104,6 +116,7 @@
         private System.Windows.Forms.Label label_FullName;
         private System.Windows.Forms.Button button_Add;
         private System.Windows.Forms.Button button_ToFile;
+        private System.Windows.Forms.Button button_Del;
     }
 }
 
