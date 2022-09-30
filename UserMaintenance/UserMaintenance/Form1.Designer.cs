@@ -85,6 +85,7 @@
             this.button_Add.TabIndex = 5;
             this.button_Add.Text = "button1";
             this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
             // Form1
             // 
