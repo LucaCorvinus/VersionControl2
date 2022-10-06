@@ -76,10 +76,9 @@ namespace Flats_CJYFZB
              "Négyzetméter ár (Ft/m2)"
             };
 
-            //én írtam a ciklust
             for (int i = 0; i < headers.Length; i++)
             {
-                xlSheet.Cells[1, i] = headers[0];
+                xlSheet.Cells[1, i+1] = headers[i];
             }
 
             //ez a sor meg volt adva
@@ -111,10 +110,44 @@ namespace Flats_CJYFZB
                 counter++;
             }
 
-            //ez a rész jó, mert meg volt adva
             xlSheet.get_Range(
              GetCell(2, 1),
              GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+
+            //meg kell állapítani a határcellákat a feladatokhoz
+            int LastRow = xlSheet.UsedRange.Rows.Count;
+            int LastColumn = xlSheet.UsedRange.Columns.Count;
+
+            //utolso oszlop feltoltese adatokkal
+            //ki kell bontani for ciklusba???
+            xlSheet.get_Range(
+             GetCell(2, LastColumn),
+             GetCell(LastRow, LastColumn)).Value2 = "=Price*1000000/FloorArea" ;
+
+            //FormatTable
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            //tábla szegélye
+            Excel.Range tableRange = xlSheet.get_Range(GetCell(2, 1), GetCell(LastRow, LastColumn));
+            tableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            //első oszlop formázása
+            Excel.Range elsoOszlop = xlSheet.get_Range(GetCell(2, 1), GetCell(LastRow, 1));
+            elsoOszlop.Font.Bold = true;
+            elsoOszlop.Interior.Color = Color.LightYellow;
+
+            //utolso oszlop háttere lightgreen
+            Excel.Range utolsoOszlop = xlSheet.get_Range(GetCell(2, LastColumn), GetCell(LastRow, LastColumn));
+            utolsoOszlop.Interior.Color = Color.LightGreen;
+
+            //utolsó oszlop adatai két tizedesre legyenek kerekítve
         }
 
         private string GetCell(int x, int y)
@@ -133,5 +166,6 @@ namespace Flats_CJYFZB
 
             return ExcelCoordinate;
         }
+
     }
 }
