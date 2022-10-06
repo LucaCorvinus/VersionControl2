@@ -42,7 +42,8 @@ namespace Flats_CJYFZB
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
 
-                // CreateTable();
+                //ez a függvény nem stimmel valamiért, ha ki van kommentelve, akkor megnyílik a cucc
+                CreateTable();
 
                 xlApp.Visible = true;
                 xlApp.UserControl = true;
@@ -57,6 +58,80 @@ namespace Flats_CJYFZB
                 xlWB = null;
                 xlApp = null;
             }
+        }
+
+        private void CreateTable()
+        {
+            //ez meg volt adva
+            string[] headers = new string[]
+            {
+             "Kód",
+             "Eladó",
+             "Oldal",
+             "Kerület",
+             "Lift",
+             "Szobák száma",
+             "Alapterület (m2)",
+             "Ár (mFt)",
+             "Négyzetméter ár (Ft/m2)"
+            };
+
+            //én írtam a ciklust
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i] = headers[0];
+            }
+
+            //ez a sor meg volt adva
+            object[,] values = new object[Flats.Count, headers.Length];
+
+            //ezt a szakaszt én írtam
+            int counter = 0;
+            foreach (Flat f in Flats)
+            {
+                values[counter, 0] = f.Code;
+                values[counter, 1] = f.Vendor;
+                values[counter, 2] = f.Side;
+                values[counter, 3] = f.District;
+                values[counter, 4] = f.Elevator;
+                values[counter, 5] = f.NumberOfRooms;
+                values[counter, 6] = f.FloorArea;
+                values[counter, 7] = f.Price;
+                values[counter, 8] = "";
+
+               if (f.Elevator == false)
+               {
+                  values[counter, 4] = "Nincs";
+               }
+               if (f.Elevator == true)
+               {
+                  values[counter, 4] = "Van";
+               }
+
+                counter++;
+            }
+
+            //ez a rész jó, mert meg volt adva
+            xlSheet.get_Range(
+             GetCell(2, 1),
+             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
         }
     }
 }
