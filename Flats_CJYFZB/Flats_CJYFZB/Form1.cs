@@ -96,7 +96,7 @@ namespace Flats_CJYFZB
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "";
+                values[counter, 8] = $"=H{counter+2} *1000000/G{counter+2}";
 
                if (f.Elevator == false)
                {
@@ -117,12 +117,6 @@ namespace Flats_CJYFZB
             //meg kell állapítani a határcellákat a feladatokhoz
             int LastRow = xlSheet.UsedRange.Rows.Count;
             int LastColumn = xlSheet.UsedRange.Columns.Count;
-
-            //utolso oszlop feltoltese adatokkal
-            //ki kell bontani for ciklusba???
-            xlSheet.get_Range(
-             GetCell(2, LastColumn),
-             GetCell(LastRow, LastColumn)).Value2 = "=Price*1000000/FloorArea" ;
 
             //FormatTable
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
@@ -148,6 +142,7 @@ namespace Flats_CJYFZB
             utolsoOszlop.Interior.Color = Color.LightGreen;
 
             //utolsó oszlop adatai két tizedesre legyenek kerekítve
+            //utolsoOszlop.
         }
 
         private string GetCell(int x, int y)
