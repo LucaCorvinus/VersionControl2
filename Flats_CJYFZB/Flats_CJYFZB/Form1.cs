@@ -42,7 +42,6 @@ namespace Flats_CJYFZB
                 xlWB = xlApp.Workbooks.Add(Missing.Value);
                 xlSheet = xlWB.ActiveSheet;
 
-                //ez a függvény nem stimmel valamiért, ha ki van kommentelve, akkor megnyílik a cucc
                 CreateTable();
 
                 xlApp.Visible = true;
@@ -62,7 +61,6 @@ namespace Flats_CJYFZB
 
         private void CreateTable()
         {
-            //ez meg volt adva
             string[] headers = new string[]
             {
              "Kód",
@@ -81,10 +79,8 @@ namespace Flats_CJYFZB
                 xlSheet.Cells[1, i+1] = headers[i];
             }
 
-            //ez a sor meg volt adva
             object[,] values = new object[Flats.Count, headers.Length];
 
-            //ezt a szakaszt én írtam
             int counter = 0;
             foreach (Flat f in Flats)
             {
@@ -142,7 +138,7 @@ namespace Flats_CJYFZB
             utolsoOszlop.Interior.Color = Color.LightGreen;
 
             //utolsó oszlop adatai két tizedesre legyenek kerekítve
-            //utolsoOszlop.
+            utolsoOszlop.NumberFormat = "#.00";
         }
 
         private string GetCell(int x, int y)
