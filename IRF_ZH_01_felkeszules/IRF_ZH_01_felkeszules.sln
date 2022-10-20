@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel_orai", "IRF_ZH_01_felkeszules\Excel_orai.csproj", "{52031D6B-5413-47BD-BB95-5CF3D68BAAB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintaZH", "MintaZH\MintaZH.csproj", "{61667BCF-E778-47CA-9CF4-E9FE7462B725}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52031D6B-5413-47BD-BB95-5CF3D68BAAB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52031D6B-5413-47BD-BB95-5CF3D68BAAB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52031D6B-5413-47BD-BB95-5CF3D68BAAB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52031D6B-5413-47BD-BB95-5CF3D68BAAB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61667BCF-E778-47CA-9CF4-E9FE7462B725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61667BCF-E778-47CA-9CF4-E9FE7462B725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61667BCF-E778-47CA-9CF4-E9FE7462B725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61667BCF-E778-47CA-9CF4-E9FE7462B725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84C8BDE0-AC0E-469C-93DB-562E39AD213B}
+	EndGlobalSection
+EndGlobal
