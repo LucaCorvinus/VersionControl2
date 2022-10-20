@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using CJYFZB_week_06.Entities;
 using CJYFZB_week_06.MNBServiceReference;
 
@@ -20,11 +22,12 @@ namespace CJYFZB_week_06
         {
             InitializeComponent();
             WebHivas();
+            XMLProcessing(WebHivas());
 
             dgw_Rates.DataSource = Rates;
         }
 
-        private void WebHivas()
+        public string WebHivas()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
@@ -39,6 +42,30 @@ namespace CJYFZB_week_06
 
             var result = response.GetExchangeRatesResult;
 
+            return result;
+
+        }
+
+        private void XMLProcessing(string result)
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                RateData rate = new RateData();
+                Rates.Add(rate);
+
+                rate.Date = DateTime.Parse(element.GetAttribute("date"));
+                
+                var childElement = (XmlElement)element.ChildNodes[0];
+                rate.Currency = childElement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
+            }
         }
     }
 }
