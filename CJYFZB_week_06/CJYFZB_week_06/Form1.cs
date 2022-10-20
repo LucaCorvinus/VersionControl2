@@ -18,18 +18,23 @@ namespace CJYFZB_week_06
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
+            GetCurrencies();
+            XMLProcessing_Currencies(GetCurrencies());
             RefreshData();
+
+            comboBox_Currencies.DataSource = Currencies;    
         }
 
         private void RefreshData()
         {
             Rates.Clear();
             WebHivas();
-            XMLProcessing(WebHivas());
+            XMLProcessing_ExchangeRates(WebHivas());
             DataVisualization();
 
             dgw_Rates.DataSource = Rates;
@@ -54,7 +59,7 @@ namespace CJYFZB_week_06
 
         }
 
-        private void XMLProcessing(string result)
+        private void XMLProcessing_ExchangeRates(string result)
         {
             var xml = new XmlDocument();
             xml.LoadXml(result);
@@ -67,6 +72,9 @@ namespace CJYFZB_week_06
                 rate.Date = DateTime.Parse(element.GetAttribute("date"));
                 
                 var childElement = (XmlElement)element.ChildNodes[0];
+                //a következő két sort ha nem szúrom be, akkor nem fut le a program
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
@@ -112,6 +120,32 @@ namespace CJYFZB_week_06
         private void comboBox_Currencies_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private string GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+
+            return result;
+        }
+
+        private void XMLProcessing_Currencies(string result)
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var childElement = (XmlElement)element.ChildNodes[0];
+                string currency = childElement.GetAttribute("curr");
+                if (childElement == null)
+                    continue;
+                Currencies.Add(currency);
+            }
         }
     }
 }
