@@ -23,7 +23,6 @@ namespace CJYFZB_week_06
         public Form1()
         {
             InitializeComponent();
-            GetCurrencies();
             XMLProcessing_Currencies(GetCurrencies());
             RefreshData();
 
@@ -138,12 +137,9 @@ namespace CJYFZB_week_06
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
-            foreach (XmlElement element in xml.DocumentElement)
+            foreach (XmlElement element in xml.DocumentElement.ChildNodes[0])
             {
-                var childElement = (XmlElement)element.ChildNodes[0];
-                string currency = childElement.GetAttribute("curr");
-                if (childElement == null)
-                    continue;
+                string currency = element.InnerText;
                 Currencies.Add(currency);
             }
         }
