@@ -66,7 +66,10 @@ namespace CJYFZB_week_07
 
         private void btn_Ball_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory()
+            {
+                BallColor = btn_BallColor.BackColor
+            };
         }
 
         private void DisplayNext()
