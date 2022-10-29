@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace CJYFZB_week_07.Entities
 {
-    public class BallFactory : IToyFactory
+    public class CarFactory : IToyFactory
     {
-       public Toy CreateNew()
+        public Toy CreateNew()
         {
-            return new Ball(); 
+            return new Car();
         }
     }
 }
