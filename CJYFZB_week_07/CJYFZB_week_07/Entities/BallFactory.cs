@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CJYFZB_week_07.Entities
 {
-    internal class BallFactory
+    public class BallFactory
     {
        public Ball CreateNew()
         {
