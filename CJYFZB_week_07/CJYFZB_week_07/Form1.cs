@@ -15,12 +15,17 @@ namespace CJYFZB_week_07
     public partial class Form1 : Form
     {
         private List<Toy> _toys = new List<Toy>();
+        private Toy _nextToy;
 
         private IToyFactory _factory;
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set
+            {
+                _factory = value;
+                DisplayNext();
+            }
         }
         public Form1()
         {
@@ -49,9 +54,29 @@ namespace CJYFZB_week_07
             if (maxPosition > 1000)
             {
                 var oldestBall = _toys[0];
-                mainPanel.Controls.Remove(oldestBall);  
+                mainPanel.Controls.Remove(oldestBall);
                 _toys.Remove(oldestBall);
             }
+        }
+
+        private void btn_Car_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void btn_Ball_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = lbl_Next.Top + lbl_Next.Height + 20;
+            _nextToy.Left = lbl_Next.Left;
+            Controls.Add(_nextToy);
         }
     }
 }
