@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CJYFZB_week_08.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,11 +15,23 @@ namespace CJYFZB_week_08
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+
         public Form1()
         {
             InitializeComponent();
             Ticks = context.Ticks.ToList();
             dgw_Ticks.DataSource = Ticks;
+            CreatePortfolio();
+        }
+
+        private void CreatePortfolio()
+        {
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+
+            dgw_Portfolio.DataSource = Portfolio;
         }
     }
 }
