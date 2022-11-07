@@ -30,6 +30,7 @@
         {
             this.dgw_Ticks = new System.Windows.Forms.DataGridView();
             this.dgw_Portfolio = new System.Windows.Forms.DataGridView();
+            this.btn_Save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgw_Ticks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgw_Portfolio)).BeginInit();
             this.SuspendLayout();
@@ -54,11 +55,22 @@
             this.dgw_Portfolio.Size = new System.Drawing.Size(240, 425);
             this.dgw_Portfolio.TabIndex = 1;
             // 
+            // btn_Save
+            // 
+            this.btn_Save.Location = new System.Drawing.Point(713, 203);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(75, 55);
+            this.btn_Save.TabIndex = 2;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.dgw_Portfolio);
             this.Controls.Add(this.dgw_Ticks);
             this.Name = "Form1";
@@ -73,6 +85,7 @@
 
         private System.Windows.Forms.DataGridView dgw_Ticks;
         private System.Windows.Forms.DataGridView dgw_Portfolio;
+        private System.Windows.Forms.Button btn_Save;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace CJYFZB_week_08
             VaRKiszamitasa();
         }
 
-        private void VaRKiszamitasa()
+        public void VaRKiszamitasa()
         {
             List<decimal> Nyereségek = new List<decimal>();
             int intervalum = 30;
@@ -69,6 +70,20 @@ namespace CJYFZB_week_08
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.Default);
+            sw.WriteLine("Időszak Nyereség");
+            //foreach (var i in nyerségekrendezve)
+            //{
+            //sw.WriteLine($"{i.Index}");
+            //}
+            sw.Close();
         }
     }
 }
