@@ -27,7 +27,7 @@ namespace CJYFZB_week_08
             VaRKiszamitasa();
         }
 
-        public void VaRKiszamitasa()
+        public List<decimal> VaRKiszamitasa()
         {
             List<decimal> Nyereségek = new List<decimal>();
             int intervalum = 30;
@@ -47,6 +47,8 @@ namespace CJYFZB_week_08
                                       select x)
                                         .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+
+            return nyereségekRendezve;
         }
 
         private void CreatePortfolio()
@@ -78,11 +80,16 @@ namespace CJYFZB_week_08
             if (sfd.ShowDialog() != DialogResult.OK) return;
 
             StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.Default);
-            sw.WriteLine("Időszak Nyereség");
-            //foreach (var i in nyerségekrendezve)
-            //{
-            //sw.WriteLine($"{i.Index}");
-            //}
+            sw.WriteLine("Időszak;Nyereség");
+
+            int ID = 0;
+            
+                foreach (var j in VaRKiszamitasa())
+                {
+                    sw.WriteLine($"{ID+1};{j}");
+                    ID++;
+                }
+            
             sw.Close();
         }
     }
