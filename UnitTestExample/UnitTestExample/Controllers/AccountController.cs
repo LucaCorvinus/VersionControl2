@@ -25,18 +25,24 @@ namespace UnitTestExample.Controllers
         //jelszónak mindent elfogad
 
         //első hiba: a második validateemailben password a helyes paraméter
+        //második hiba talán: a második az validatepassword és nem email
+        //ez segített, de még nem jó a teszt
+        //minden létrehozott accountnak ugyanaz az ID-ja
+        //adtam az új accountnak új guididt, de nem segített
+        //az előbb rosszul a adtm a nw Guid-ot, mostmár jó ,az volt a probléma
         public Account Register(string email, string password)
         {
             if(!ValidateEmail(email))
                 throw new ValidationException(
                     "A megadott e-mail cím nem megfelelő!");
-            if(!ValidateEmail(password))
+            if(!ValidatePassword(password))
                 throw new ValidationException(
                     "A megadottt jelszó nem megfelelő!\n" +
                     "A jelszó legalább 8 karakter hosszú kell legyen, csak az angol ABC betűiből és számokból állhat, és tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot.");
 
             var account = new Account()
             {
+                ID = Guid.NewGuid(),
                 Email = email,
                 Password = password
             };
