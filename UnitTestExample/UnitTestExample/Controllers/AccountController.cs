@@ -20,12 +20,17 @@ namespace UnitTestExample.Controllers
             AccountManager = new AccountManager();
         }
 
+
+        //a függvény csak az email címeket veti alá vizsgálatnak valamiért
+        //jelszónak mindent elfogad
+
+        //első hiba: a második validateemailben password a helyes paraméter
         public Account Register(string email, string password)
         {
             if(!ValidateEmail(email))
                 throw new ValidationException(
                     "A megadott e-mail cím nem megfelelő!");
-            if(!ValidateEmail(email))
+            if(!ValidateEmail(password))
                 throw new ValidationException(
                     "A megadottt jelszó nem megfelelő!\n" +
                     "A jelszó legalább 8 karakter hosszú kell legyen, csak az angol ABC betűiből és számokból állhat, és tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot.");
