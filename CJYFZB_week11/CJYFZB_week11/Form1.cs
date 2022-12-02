@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Odbc;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace CJYFZB_week11
     {
         Random rng = new Random(1);
 
+        List<int> NrFemale = new List<int>();
+        List<int> NrMale = new List<int>();
+
         List<Person> Population = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
@@ -23,12 +27,15 @@ namespace CJYFZB_week11
         {
             InitializeComponent();
 
-            Population = GetPopulation(@"C:\Temp\nép.csv");
+            
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
 
             //dataGridView1.DataSource = DeathProbabilities;
+        }
 
+        private void Simulation()
+        {
             for (int year = 2005; year <= 2024; year++)
             {
                 // Végigmegyünk az összes személyen
@@ -145,6 +152,31 @@ namespace CJYFZB_week11
                     Population.Add(újszülött);
                 }
             }
+        }
+
+        private void btn_Startbtn_Startbtn_Start_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            NrFemale.Clear();
+            NrMale.Clear();
+            Population = GetPopulation(textBox_Eleres.Text);
+            Simulation();
+            DisplayResult();
+        }
+
+        private void btn_Browse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = textBox_Eleres.Text;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                 textBox_Eleres.Text = ofd.FileName;
+            }
+        }
+
+        private void DisplayResult()
+        {
+            //
         }
     }
 }
